@@ -19,7 +19,7 @@ News
        
         {% for post in news %}
         <tr>
-            <td><a href="http://127.0.0.1:8000/news/{{post.id}}">{{ post.title|censor }}</a></td>
+            <td><a href="/news/{{post.id}}">{{ post.title|censor }}</a></td>
             <td>{{ post.time_create|date:'d M Y' }}</td>
             <td>{{ post.post_text|truncatechars:20|censor }}</td>
         </tr>
