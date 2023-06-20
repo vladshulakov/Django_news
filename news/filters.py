@@ -9,6 +9,12 @@ class DateInput(forms.DateInput):
 
 
 class PostFilter(FilterSet):
+    title = CharFilter(
+        field_name='title',
+        lookup_expr='contains',
+        label='Title'
+    )
+    
     author = ModelChoiceFilter(
         field_name='author',
         queryset=Author.objects.all(),
@@ -23,8 +29,3 @@ class PostFilter(FilterSet):
         widget=DateInput
     )
 
-    title = CharFilter(
-        field_name='title',
-        lookup_expr='contains',
-        label='Title'
-    )
