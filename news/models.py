@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django.urls import reverse
 
 # Create your models here.
 
@@ -48,10 +49,13 @@ class Post(models.Model):
     def dislike(self):
         self.rating -= 1
         self.save()
+    
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)])
 
 
 class PostCategory(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.PROTECT)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
 
 
