@@ -3,6 +3,7 @@ from .models import Post
 from .filters import PostFilter
 from .forms import PostForm
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 class PostsList(ListView):
@@ -57,7 +58,8 @@ class PostSearch(ListView):
         context['filterset'] = self.filterset
         return context
     
-class PostCreate(CreateView):
+class PostCreate(PermissionRequiredMixin, CreateView):
+    permission_required = ('news.add_post',)
     # Указываем нашу разработанную форму
     form_class = PostForm
     # модель товаров
@@ -75,7 +77,8 @@ class PostCreate(CreateView):
         return super().form_valid(form)
     
 
-class PostUpdate(UpdateView):
+class PostUpdate(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('news.change_post',)
     # Указываем нашу разработанную форму
     form_class = PostForm
     # модель товаров
@@ -84,7 +87,8 @@ class PostUpdate(UpdateView):
     template_name = 'news_create.html'
 
 
-class PostDelete(DeleteView):
+class PostDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = ('news.delete_post',)
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('post_list')
