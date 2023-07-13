@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from accounts.views import ProfileView, upgrade_me
+from news.views import CategoryView, subscribe, unsubscribe
  
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +26,8 @@ urlpatterns = [
     path('articles/', include('news.urls')),
     path('accounts/', include('allauth.urls')),
     path('accounts/profile/', ProfileView.as_view()),
-    path('accounts/upgrade/', upgrade_me, name = 'upgrade')
+    path('accounts/upgrade/', upgrade_me, name = 'upgrade'),
+    path('categories/', CategoryView.as_view()),
+    path('categories/subscribe/', subscribe, name='subscribe'),
+    path('categories/unsubscribe/', unsubscribe, name='unsubscribe'),
 ]

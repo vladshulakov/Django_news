@@ -46,8 +46,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # ... include the providers you want to enable:
     'allauth.socialaccount.providers.google',
+    'django_apscheduler',
 ]
 
 SITE_ID = 1
@@ -152,12 +152,27 @@ STATICFILES_DIRS = [
 
 LOGIN_URL = '/accounts/login/'
 LOGOUT_REDIRECT_URL = '/news/'
+LOGIN_REDIRECT_URL = '/accounts/profile/'
 
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 ACCOUNT_FORMS = {'signup': 'accounts.models.BasicSignupForm'}
+
+
+EMAIL_HOST = 'smtp.yandex.ru' 
+EMAIL_PORT = 465  
+EMAIL_HOST_USER = 'iamrock'  
+EMAIL_HOST_PASSWORD = 'sodfwynglgatvszo' 
+EMAIL_USE_SSL = True 
+
+DEFAULT_FROM_EMAIL = 'iamrock@yandex.ru'
+
+
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+
+APSCHEDULER_RUN_NOW_TIMEOUT = 25

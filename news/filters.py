@@ -1,7 +1,7 @@
-from django_filters import FilterSet, ModelChoiceFilter, CharFilter, DateFilter, DateFromToRangeFilter
+from django_filters import FilterSet, ModelChoiceFilter, CharFilter, DateFilter
 from django import forms
 
-from news.models import Author
+from news.models import Author, Category
 
 
 class DateInput(forms.DateInput):
@@ -28,4 +28,10 @@ class PostFilter(FilterSet):
         label='Date',
         widget=DateInput
     )
+
+    category = ModelChoiceFilter(
+        field_name='categories',
+        label='Category',
+        empty_label='Все категории',
+        queryset=Category.objects.all())
 

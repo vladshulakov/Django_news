@@ -1,0 +1,39 @@
+{% extends 'flatpages/default.html' %}
+{% load static %}
+
+{% block title %}
+Categories
+{% endblock title %}
+
+{% block content %}
+    <h1>Все категории</h1>
+    {% if categories %}
+    <table class="table table-bordered">       
+        {% for i in categories %}
+        <tr>
+            <td><a href="/news/search/?category={{i.id}}">{{ i }}</a></td>
+            <td>
+                {% if request.user not in i.subscribers.all %}
+		<div> <!-- subscribe -->
+			<form action="{% url 'subscribe' %}" method="get">
+						<input style="display: none" name="category-id" value="{{ i.id }}">
+						<input class="edit-button" type="submit" value="Подписаться">
+				</form>
+		</div>
+		{% else %}
+		<div> <!-- unsubscribe -->
+			<form action="{% url 'unsubscribe' %}" method="get">
+						<input style="display: none" name="category-id" value="{{ i.id }}">
+						<input class="edit-button" type="submit" value="Отписаться">
+				</form>
+		</div>
+		{% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    {% else %}
+        <h2>Категории отсутствуют</h2>
+    {% endif %}
+{% endblock content %}

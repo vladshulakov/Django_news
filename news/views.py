@@ -1,9 +1,11 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post
+from .models import Post, Category
 from .filters import PostFilter
 from .forms import PostForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 
 
 class PostsList(ListView):
@@ -72,3 +74,23 @@ class PostDelete(PermissionRequiredMixin, DeleteView):
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('post_list')
+
+class CategoryView(ListView):
+    model = Category
+    template_name = 'categories.html'
+    context_object_name = 'categories'
+
+@login_required
+def subscribe(request):
+    user = request.user
+    category = Category.objects.get(id=int(request.GET['category-id']))
+    category.subscribers.add(user)
+    return redirect('/categories/')
+
+
+@login_required
+def unsubscribe(request):
+    user = request.user
+    category = Category.objects.get(id=int(request.GET['category-id']))
+    category.subscribers.remove(user)
+    return redirect('/categories/')

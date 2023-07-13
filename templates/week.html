@@ -1,0 +1,20 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table class="table table-bordered">
+     
+        {% for post in news %}
+        
+            <a href="http://127.0.0.1:8000/news/{{post.id}}">{{ post.title }}</a>
+            <p>{{ post.time_create|date:'d M Y' }}</p>
+            <p>{{ post.post_text|truncatechars:20 }}</p>
+        
+        {% endfor %}
+
+    </table>
+</body>
+</html>
