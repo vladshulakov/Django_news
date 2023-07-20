@@ -1,0 +1,10 @@
+{% load custom_filters %}
+
+{% block title %}
+<h1>Новый пост от {{ post.time_create|date:'d M Y' }}</h1>
+{% endblock title %}
+
+{% block content %}
+<h2>{{ post.title|censor }}</h2>
+<h3>{{ post.post_text|truncatechars:20|censor }}</h3>
+{% endblock content %}
