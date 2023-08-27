@@ -1,0 +1,10 @@
+2023-08-27 13:51:54,490 INFO autoreload Watching for file changes with StatReloader
+2023-08-27 13:51:58,720 INFO basehttp "GET /news/55 HTTP/1.1" 200 2565
+2023-08-27 13:52:00,370 INFO basehttp "GET /news/ HTTP/1.1" 200 4279
+2023-08-27 13:52:01,817 INFO basehttp "GET /news/55 HTTP/1.1" 200 2565
+2023-08-27 13:52:07,381 INFO basehttp "GET /news/55/update/ HTTP/1.1" 302 0
+2023-08-27 13:52:07,399 INFO basehttp "GET /accounts/login/?next=/news/55/update/ HTTP/1.1" 200 1612
+2023-08-27 13:52:11,084 WARNING log Not Found: /
+2023-08-27 13:52:11,084 WARNING basehttp "GET / HTTP/1.1" 404 179
+2023-08-27 13:52:12,769 WARNING log Not Found: /
+2023-08-27 13:52:12,769 WARNING basehttp "GET / HTTP/1.1" 404 179

@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from accounts.views import ProfileView, upgrade_me
 from news.views import CategoryView, subscribe, unsubscribe
+
  
 urlpatterns = [
     path('admin/', admin.site.urls),
